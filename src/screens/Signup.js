@@ -5,7 +5,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
+import {Icon} from '@rneui/themed';
 
 import Formerror from '../components/Formerror';
 import Formsuccess from '../components/Formsuccess';
@@ -59,7 +61,7 @@ const Signup = ({navigation}) => {
     }
 
     if (!password_match) {
-      setErrorMessage('Please fill in all fields');
+      setErrorMessage('Password do not match');
       return setDisplayFormErr(true);
     }
 
@@ -104,65 +106,70 @@ const Signup = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.Bottomview}>
-        <Text style={styles.heading}>
-          Create {'\n'}
-          <Text style={{color: '#E9713F', fontWeight: 'bold'}}>Account</Text>
-        </Text>
-
-        <View style={styles.Formview}>
-          <TextInput
-            onChangeText={val => setFullname(val)}
-            value={fullname}
-            style={styles.TextInput}
-            placeholder={'Full name*'}
-            placeholderTextColor={'#0F1817'}
-          />
-          <TextInput
-            onChangeText={val => setEmail(val)}
-            value={email}
-            style={styles.TextInput}
-            placeholder={'Email address*'}
-            placeholderTextColor={'#0F1817'}
-          />
-          <TextInput
-            onChangeText={val => setMobile(val)}
-            value={mobile}
-            style={styles.TextInput}
-            placeholder={'Mobile*'}
-            placeholderTextColor={'#0F1817'}
-          />
-          <TextInput
-            onChangeText={val => setPassword(val)}
-            value={password}
-            style={styles.TextInput}
-            secureTextEntry={true}
-            placeholder={'Password*'}
-            placeholderTextColor={'#0F1817'}
-          />
-          <TextInput
-            onChangeText={val => setConfirmPassword(val)}
-            value={confirmPassword}
-            style={styles.TextInput}
-            secureTextEntry={true}
-            placeholder={'Confirm Password*'}
-            placeholderTextColor={'#0F1817'}
-          />
-
-          <TouchableOpacity onPress={validate_form} style={styles.Btn}>
-            <Text style={styles.BtnText}>Sign up</Text>
+        <ScrollView>
+          <TouchableOpacity onPress={navigate}>
+            <Icon style={styles.Icon} name="left" type="antdesign" />
           </TouchableOpacity>
-        </View>
+          <Text style={styles.heading}>
+            Create {'\n'}
+            <Text style={{color: '#E9713F', fontWeight: 'bold'}}>Account</Text>
+          </Text>
 
-        <TouchableOpacity
-          onPress={navigate}
-          style={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            marginTop: 10,
-          }}>
-          <Text style={{color: '#0F1817'}}>Sign in</Text>
-        </TouchableOpacity>
+          <View style={styles.Formview}>
+            <TextInput
+              onChangeText={val => setFullname(val)}
+              value={fullname}
+              style={styles.TextInput}
+              placeholder={'Full name*'}
+              placeholderTextColor={'#0F1817'}
+            />
+            <TextInput
+              onChangeText={val => setEmail(val)}
+              value={email}
+              style={styles.TextInput}
+              placeholder={'Email address*'}
+              placeholderTextColor={'#0F1817'}
+            />
+            <TextInput
+              onChangeText={val => setMobile(val)}
+              value={mobile}
+              style={styles.TextInput}
+              placeholder={'Mobile*'}
+              placeholderTextColor={'#0F1817'}
+            />
+            <TextInput
+              onChangeText={val => setPassword(val)}
+              value={password}
+              style={styles.TextInput}
+              secureTextEntry={true}
+              placeholder={'Password*'}
+              placeholderTextColor={'#0F1817'}
+            />
+            <TextInput
+              onChangeText={val => setConfirmPassword(val)}
+              value={confirmPassword}
+              style={styles.TextInput}
+              secureTextEntry={true}
+              placeholder={'Confirm Password*'}
+              placeholderTextColor={'#0F1817'}
+            />
+
+            <TouchableOpacity onPress={validate_form} style={styles.Btn}>
+              <Text style={styles.BtnText}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity
+            onPress={navigate}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              marginTop: 10,
+            }}>
+            <Text style={{color: '#0F1817'}}>Sign in</Text>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     </View>
   );
@@ -210,7 +217,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 36,
     color: '#0F1817',
-    marginTop: 20,
+    marginTop: 10,
     marginLeft: 30,
     fontWeight: 'bold',
   },
@@ -226,6 +233,12 @@ const styles = StyleSheet.create({
     color: '#CFFE57',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  Icon: {
+    color: '#0F1817',
+    marginTop: 15,
+    marginLeft: 30,
+    alignItems: 'flex-start',
   },
 });
 

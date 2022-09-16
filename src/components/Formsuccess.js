@@ -1,5 +1,11 @@
 import * as React from 'react';
-import {StyleSheet, Text, ActivityIndicator} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native';
+import {Button, Overlay, Icon} from '@rneui/themed';
 
 const Formsuccess = props => {
   return props.successMessage ? (
@@ -15,7 +21,7 @@ const Formsuccess = props => {
     </Overlay>
   ) : (
     <Overlay overlayStyle={styles.overlay} isVisible={true}>
-      <ActivityIndicator size={large} color={'#CFFE58'} />
+      <ActivityIndicator size={100} color={'#0F1817'} />
     </Overlay>
   );
 };
@@ -45,6 +51,7 @@ const styles = StyleSheet.create({
     color: '#0F1817',
     fontSize: 20,
     marginTop: 20,
+    textAlign: 'center',
   },
   Btn: {
     borderRadius: 20,
