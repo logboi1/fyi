@@ -7,13 +7,56 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {auth} from '../../Firebase/firebase';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+
+import Formerror from '../components/Formerror';
+import Formsuccess from '../components/Formsuccess';
+
 const Signin = ({navigation}) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [successMessage, setSuccessMessage] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState();
+  const [displayFormErr, setDisplayFormErr] = React.useState(false);
+  const [errMessage, setErrorMessage] = React.useState('');
+
   function navigate() {
     navigation.navigate('Signup');
   }
 
+  const validate_input = () => {
+    var form_inputs = [email, password];
+
+    if (form_inputs.includes('') || form_inputs.includes(undefined)) {
+      setErrorMessage('Please fill in all fields');
+      return setDisplayFormErr(true);
+    }
+    setIsLoading(true);
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        setIsLoading(false);
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch(error => {
+        setIsLoading(false);
+        const errorMessage = error.code;
+        console.log(error.code);
+        setErrorMessage(errorMessage);
+        return setDisplayFormErr(true);
+      });
+  };
+
   return (
     <View style={styles.mainview}>
+      {displayFormErr == true ? (
+        <Formerror hideErrForm={setDisplayFormErr} err={errMessage} />
+      ) : null}
+
+      {isLoading == true ? <Formsuccess /> : null}
+
       <View style={styles.Topview}>
         <Text
           style={{
@@ -45,17 +88,21 @@ const Signin = ({navigation}) => {
         <View style={styles.Formview}>
           <TextInput
             style={styles.TextInput}
+            onChangeText={val => setEmail(val)}
+            value={email}
             placeholder={'Email address*'}
             placeholderTextColor={'#0F1817'}
           />
           <TextInput
+            onChangeText={val => setPassword(val)}
+            value={password}
             style={styles.TextInput}
             secureTextEntry={true}
             placeholder={'Password*'}
             placeholderTextColor={'#0F1817'}
           />
 
-          <TouchableOpacity style={styles.Btn}>
+          <TouchableOpacity style={styles.Btn} onPress={validate_input}>
             <Text style={styles.BtnText}>Sign in</Text>
           </TouchableOpacity>
         </View>

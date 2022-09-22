@@ -167,7 +167,7 @@ const Signup = ({navigation}) => {
               alignItems: 'center',
               marginTop: 10,
             }}>
-            <Text style={{color: '#0F1817'}}>Sign in</Text>
+            <Text style={{color: '#0F1817', marginBottom: 3}}>Sign in</Text>
           </TouchableOpacity>
         </ScrollView>
       </View>
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 18,
   },
 
   TextInput: {
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 36,
     color: '#0F1817',
-    marginTop: 10,
+    marginTop: 5,
     marginLeft: 30,
     fontWeight: 'bold',
   },
